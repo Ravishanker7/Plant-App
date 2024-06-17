@@ -7,4 +7,5 @@ sealed class Routes(val Route : String) {
     object plantsListScreen : Routes("Plants_ListScreen")
 
     object plantsDetailScreen : Routes("Plants_DetailsScreen")
+
 }

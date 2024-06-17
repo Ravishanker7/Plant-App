@@ -42,9 +42,9 @@ import com.example.findplants.R
 import com.example.findplants.ui.theme.primaryColor
 
 
-@Preview(showBackground = true)
+
 @Composable
-fun SplashScreen() {
+fun SplashScreen(navHostController: NavHostController) {
     val fontpoppins = FontFamily(
         Font(R.font.poppinssemibold,FontWeight.SemiBold)
     )
@@ -75,7 +75,9 @@ fun SplashScreen() {
                             fontStyle = FontStyle.Normal,
                         )
                         Spacer(modifier = Modifier.height(100.dp))
-                        Button(onClick = { /*TODO*/ },
+                        Button(onClick = {
+                                         navHostController.navigate(Routes.plantsListScreen.Route)
+                        },
                             shape = RoundedCornerShape(1.dp),
                             modifier = Modifier
                                 .size(250.dp, 60.dp),
