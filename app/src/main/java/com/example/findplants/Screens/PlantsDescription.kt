@@ -2,6 +2,7 @@ package com.example.findplants.Screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -42,18 +43,19 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.findplants.R
 import com.example.findplants.ui.theme.cardcolor
 import com.example.findplants.ui.theme.fontpoppins
 import com.example.findplants.ui.theme.priceColor
 import com.example.findplants.ui.theme.primaryColor
 
-@Preview(showBackground = true)
+
 @Composable
-fun PlantsDescription() {
+fun PlantsDescription(title: String?, description: String?, image: String?,price : String?,navHostController: NavHostController) {
 
     var itemsCount by remember {
-        mutableStateOf("5")
+        mutableStateOf(0)
     }
     Surface {
         Column(modifier = Modifier
@@ -69,6 +71,9 @@ fun PlantsDescription() {
                     imageVector = Icons.Default.ArrowBack, contentDescription = null,
                     modifier = Modifier
                         .size(40.dp)
+                        .clickable {
+                            navHostController.popBackStack()
+                        }
                 )
 
                 Icon(
@@ -80,7 +85,7 @@ fun PlantsDescription() {
             Box (modifier = Modifier
                 .fillMaxWidth()
                 .background(color = Color.LightGray), contentAlignment = Alignment.Center){
-                Image(painter = painterResource(id = R.drawable.img_3), contentDescription = null,
+                Image(painter = painterResource(id = image.toString().toInt()), contentDescription = null,
                     modifier = Modifier
                         .size(290.dp))
             }
@@ -90,14 +95,39 @@ fun PlantsDescription() {
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(bottomEnd = 40.dp))
                 .background(color = Color.LightGray),
-                horizontalArrangement = Arrangement.Center) {
-                Icon(imageVector = Icons.Default.Add, contentDescription =null, tint = Color.Black )
-                Text(text =itemsCount )
-                Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription =null )
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+                ) {
+                Box (modifier = Modifier
+                    .size(20.dp)
+                    .clickable {
+                        if(itemsCount>0){
+                            itemsCount--;
+                        }
+
+                    }
+                    .background(color = primaryColor),
+                    contentAlignment = Alignment.Center){
+                    Image(painter = painterResource(id = R.drawable.img_6),
+                        contentDescription =null )
+                }
+                Text(text =itemsCount.toString(), fontSize = 22.sp,
+                    fontFamily = fontpoppins,
+                    modifier = Modifier.padding(5.dp))
+                Box (modifier = Modifier
+                    .size(20.dp)
+                    .clickable {
+                        itemsCount++;
+                    }
+                    .background(color = primaryColor),
+                    contentAlignment = Alignment.Center){
+                    Image(painter = painterResource(id = R.drawable.img_7),
+                        contentDescription =null )
+                }
             }
 
             Spacer(modifier = Modifier.height(20.dp))
-            Text(text = "Monstera",
+            Text(text = title.toString(),
                 modifier = Modifier.padding(start = 20.dp, bottom = 5.dp),
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 20.sp)
@@ -111,7 +141,7 @@ fun PlantsDescription() {
                 .clip(RoundedCornerShape(topEnd = 10.dp, bottomEnd = 10.dp))
                 .background(color = primaryColor)
                 , contentAlignment = Alignment.CenterEnd){
-                Text(text = "$200", color = Color.White,
+                Text(text = price.toString(), color = Color.White,
                     fontFamily = fontpoppins,
                     fontSize = 20.sp, modifier = Modifier.padding(end = 10.dp))
             }

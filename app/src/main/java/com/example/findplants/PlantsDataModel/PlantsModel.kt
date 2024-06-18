@@ -15,5 +15,7 @@ fun getPlants() : List<PlantsModel>{
         PlantsModel("Fiddle Leaf Fig", R.drawable.img_3, "Indoor", "$180"),
         PlantsModel("Snake Plant", R.drawable.img_4, "Indoor", "$50"),
         PlantsModel("Spider Plant", R.drawable.img_5, "Indoor", "$30"),
+        PlantsModel("Snake Plant", R.drawable.img_4, "Indoor", "$50"),
+        PlantsModel("Spider Plant", R.drawable.img_5, "Indoor", "$30"),
     )
 }

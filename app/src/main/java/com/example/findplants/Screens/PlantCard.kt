@@ -32,7 +32,7 @@ import com.example.findplants.ui.theme.fontpoppins
 
 @Composable
 fun PlantCard(list : PlantsModel,onClick : ()->Unit) {
-    Surface(modifier = Modifier.size(height = 300.dp, width = 200.dp).padding(10.dp)
+    Surface(modifier = Modifier.size(height = 280.dp, width = 200.dp).padding(5.dp)
     ) {
         Column(modifier = Modifier.fillMaxSize()
             .background(color = cardcolor)

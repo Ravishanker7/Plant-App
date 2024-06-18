@@ -3,8 +3,10 @@ package com.example.findplants.Navigation
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.example.findplants.Screens.PlantsDescription
 import com.example.findplants.Screens.PlantsDetailsScreen
 import com.example.findplants.Screens.SplashScreen
@@ -18,8 +20,20 @@ fun NavController(navHostController: NavHostController){
         composable(Routes.plantsListScreen.Route){
             PlantsDetailsScreen(navHostController)
         }
-        composable(Routes.plantsDetailScreen.Route){
-            PlantsDescription()
+        composable(
+            route = Routes.PlantsDetailScreen.Route,
+            arguments = listOf(
+                navArgument("title") { type = NavType.StringType },
+                navArgument("description") { type = NavType.StringType },
+                navArgument("image") { type = NavType.StringType },
+                navArgument("Price"){type=NavType.StringType}
+            )
+        ) { backStackEntry ->
+            val title = backStackEntry.arguments?.getString("title")
+            val description = backStackEntry.arguments?.getString("description")
+            val image = backStackEntry.arguments?.getString("image")
+            val price=backStackEntry.arguments?.getString("Price")
+            PlantsDescription(title, description, image,price,navHostController)
         }
     }
 }
