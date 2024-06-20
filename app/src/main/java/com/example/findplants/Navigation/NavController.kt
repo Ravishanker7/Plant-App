@@ -26,14 +26,16 @@ fun NavController(navHostController: NavHostController){
                 navArgument("title") { type = NavType.StringType },
                 navArgument("description") { type = NavType.StringType },
                 navArgument("image") { type = NavType.StringType },
-                navArgument("Price"){type=NavType.StringType}
+                navArgument("Price"){type=NavType.StringType},
+                navArgument("About"){type=NavType.StringType}
             )
         ) { backStackEntry ->
             val title = backStackEntry.arguments?.getString("title")
             val description = backStackEntry.arguments?.getString("description")
             val image = backStackEntry.arguments?.getString("image")
             val price=backStackEntry.arguments?.getString("Price")
-            PlantsDescription(title, description, image,price,navHostController)
+            val about=backStackEntry.arguments?.getString("About")
+            PlantsDescription(title, description, image,price,about,navHostController)
         }
     }
 }

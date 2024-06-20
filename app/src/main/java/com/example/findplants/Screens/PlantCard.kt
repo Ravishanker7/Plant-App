@@ -45,18 +45,21 @@ fun PlantCard(list : PlantsModel,onClick : ()->Unit) {
                     contentDescription = null)
             }
             Text(text = list.PlantName,
+                color = Color.Black,
                 modifier = Modifier
                     .padding(start = 10.dp),
                 fontSize = 18.sp,
                 fontFamily = fontpoppins,
                 fontWeight = FontWeight.Bold)
             Text(text = list.PlantDescription,
+                color = Color.Black,
                 modifier = Modifier
                     .padding(start = 10.dp),
                 fontSize = 12.sp,
                 fontFamily = fontpoppins,
                 fontWeight = FontWeight.Light)
             Text(text = list.PlantPrice,
+                color = Color.Black,
                 modifier = Modifier.fillMaxWidth()
                     .padding(10.dp),
                 fontSize = 14.sp,

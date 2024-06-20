@@ -84,6 +84,7 @@ fun SplashScreen(navHostController: NavHostController) {
                                     colors = buttonColors(primaryColor)) {
                             Text(text = "Get Started",
                                 fontFamily = fontpoppins,
+                                color = Color.White,
                                 fontSize = 20.sp)
                         }
 

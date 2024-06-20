@@ -3,6 +3,7 @@ package com.example.findplants.Screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.ScrollableState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,7 +16,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Add
@@ -52,23 +56,31 @@ import com.example.findplants.ui.theme.primaryColor
 
 
 @Composable
-fun PlantsDescription(title: String?, description: String?, image: String?,price : String?,navHostController: NavHostController) {
+fun PlantsDescription(title: String?, description: String?, image: String?,price : String?,about : String?,navHostController: NavHostController) {
 
     var itemsCount by remember {
         mutableStateOf(0)
     }
+
+    val scrollState = rememberScrollState()
+
+
     Surface {
+
         Column(modifier = Modifier
-            .fillMaxWidth()) {
+            .fillMaxWidth()
+            .verticalScroll(scrollState)
+            .background(color = Color.White)) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(color = Color.LightGray)
-                    .padding(15.dp),
+                    .padding(25.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack, contentDescription = null,
+                    tint = Color.Black,
                     modifier = Modifier
                         .size(40.dp)
                         .clickable {
@@ -78,6 +90,7 @@ fun PlantsDescription(title: String?, description: String?, image: String?,price
 
                 Icon(
                     imageVector = Icons.Default.Favorite, contentDescription = null,
+                    tint = Color.Black,
                     modifier = Modifier
                         .size(40.dp)
                 )
@@ -101,7 +114,7 @@ fun PlantsDescription(title: String?, description: String?, image: String?,price
                 Box (modifier = Modifier
                     .size(20.dp)
                     .clickable {
-                        if(itemsCount>0){
+                        if (itemsCount > 0) {
                             itemsCount--;
                         }
 
@@ -128,11 +141,13 @@ fun PlantsDescription(title: String?, description: String?, image: String?,price
 
             Spacer(modifier = Modifier.height(20.dp))
             Text(text = title.toString(),
+                color = Color.Black,
                 modifier = Modifier.padding(start = 20.dp, bottom = 5.dp),
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 20.sp)
             Text(text = "Indoor",
                 fontWeight = FontWeight.W400,
+                color = Color.Black,
                 modifier = Modifier.padding(start = 20.dp, bottom = 10.dp),
                 fontSize = 17.sp)
             Box (modifier = Modifier
@@ -150,14 +165,13 @@ fun PlantsDescription(title: String?, description: String?, image: String?,price
                 .background(color = Color.Black))
 
             Text(text = "About", textAlign = TextAlign.Center,
+                color = Color.Black,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(start = 10.dp, top = 10.dp, bottom = 10.dp),
                 fontSize = 20.sp)
-            Text(text ="Monstera deliciosa, the Swiss cheese plant or split-leaf philodendron" +
-                    " is a species of flowering plant native to tropical forests of southern Mexico, " +
-                    "south to Panama. It has been introduced to many tropical areas, and has become a mildly " +
-                    "invasive species in Hawaii, Seychelles, Ascension Island and the Society Islands.",
+            Text(text =about.toString(),
                 textAlign = TextAlign.Justify,
+                color = Color.Black,
                 modifier = Modifier.padding(start = 10.dp, end = 10.dp),
                 fontSize =18.sp)
 
@@ -172,7 +186,8 @@ fun PlantsDescription(title: String?, description: String?, image: String?,price
                 ) {
                     Box(
                         modifier = Modifier
-                            .background(color = Color.LightGray),
+                            .background(color = Color.LightGray)
+                            .height(60.dp),
                         contentAlignment = Alignment.Center
                     ) {
                        Icon(imageVector = Icons.Default.ShoppingCart,
@@ -181,7 +196,7 @@ fun PlantsDescription(title: String?, description: String?, image: String?,price
                 }
                 Box(modifier = Modifier
                     .fillMaxWidth()
-                    .height(80.dp)
+                    .height(60.dp)
                     .padding(start = 15.dp)
                     .clip(RoundedCornerShape(15.dp))
                     .background(color = primaryColor),

@@ -40,6 +40,7 @@ import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -88,9 +89,12 @@ fun PlantsDetailsScreen(navHostController: NavHostController) {
     }
     Scaffold(
         bottomBar = {
-            NavigationBar(modifier = Modifier) {
+            NavigationBar(modifier = Modifier.background(color = Color.White), containerColor = Color.White) {
                 items.forEachIndexed{index, item ->
-                    NavigationBarItem(
+                    NavigationBarItem(modifier = Modifier
+                        .height(80.dp)
+                        .fillMaxWidth()
+                        .background(color = Color.White),
                         selected = selectedItemIndex==index,
                         icon = {
                             Icon(modifier = Modifier.size(30.dp),
@@ -109,16 +113,19 @@ fun PlantsDetailsScreen(navHostController: NavHostController) {
         it
         Column(modifier = Modifier
             .fillMaxWidth()
+            .background(color = Color.White)
             .padding(20.dp)) {
 
             Row(modifier = Modifier
                 .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween) {
                 Icon(imageVector = Icons.Default.Menu, contentDescription =null,
+                    tint = Color.Black,
                     modifier = Modifier
                         .size(40.dp))
 
                 Icon(imageVector = Icons.Default.AccountBox, contentDescription =null,
+                    tint = Color.Black,
                     modifier = Modifier
                         .size(40.dp))
             }
@@ -128,6 +135,7 @@ fun PlantsDetailsScreen(navHostController: NavHostController) {
             Text(text = "Let’s Find" +"\n"+
                     "Your Plants!",
                 modifier = Modifier.padding(10.dp),
+                color = Color.Black,
                 fontSize = 30.sp,
                 fontWeight = FontWeight.Normal,
                 fontFamily = fontpoppins)
@@ -164,6 +172,7 @@ fun PlantsDetailsScreen(navHostController: NavHostController) {
                     }
                 }
             }
+            getPlants().shuffled()
             LazyVerticalGrid(columns = GridCells.Fixed(2),
                 modifier = Modifier.padding(10.dp)) {
                 items(getPlants()){
@@ -172,7 +181,8 @@ fun PlantsDetailsScreen(navHostController: NavHostController) {
                         val encodedDescription = Uri.encode(it.PlantDescription)
                         val encodedImage = Uri.encode(it.PlantImage.toString())
                         val Price=it.PlantPrice
-                        val route = "plantsDetailScreen/$encodedTitle/$encodedDescription/$encodedImage/$Price"
+                        val about=it.plantDetailDescription
+                        val route = "plantsDetailScreen/$encodedTitle/$encodedDescription/$encodedImage/$Price/$about"
                         navHostController.navigate(route)
                     })
                 }

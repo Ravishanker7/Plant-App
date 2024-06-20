@@ -9,7 +9,7 @@ sealed class Routes(val Route : String) {
 
     object plantsListScreen : Routes("Plants_ListScreen")
 
-    object PlantsDetailScreen : Routes("plantsDetailScreen/{title}/{description}/{image}/{Price}")
+    object PlantsDetailScreen : Routes("plantsDetailScreen/{title}/{description}/{image}/{Price}/{About}")
 
 
 
